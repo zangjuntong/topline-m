@@ -5,7 +5,20 @@ import {
   CellGroup,
   NavBar,
   Field,
-  Toast } from 'vant'
+  Toast,
+  CountDown,
+  Tabbar,
+  TabbarItem,
+  Image,
+  Grid,
+  GridItem,
+  Icon,
+  Dialog,
+  Tab,
+  Tabs,
+  List,
+  PullRefresh
+} from 'vant'
 
 Vue.use(Button)
   .use(Cell)
@@ -13,3 +26,15 @@ Vue.use(Button)
   .use(NavBar)
   .use(Field)
   .use(Toast)
+  .use(CountDown)
+  .use(Tabbar)
+  .use(TabbarItem)
+  .use(Icon)
+  .use(Image)
+  .use(Grid)
+  .use(GridItem)
+  .use(Dialog)
+  .use(Tab)
+  .use(Tabs)
+  .use(List)
+  .use(PullRefresh)

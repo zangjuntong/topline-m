@@ -1,10 +1,31 @@
 // 用户登录模块
 import request from '@/utils/request.js'
-
+// 登录
 export const login = (data) => {
   return request({
     method: 'POST',
     url: '/app/v1_0/authorizations',
     data
+  })
+}
+// 获取验证码
+export const getSmsCode = (mobile) => {
+  return request({
+    method: 'get',
+    url: `/app/v1_0/sms/codes/${mobile}`
+  })
+}
+// 获取用户信息
+export const getUserInfo = () => {
+  return request({
+    method: 'get',
+    url: `/app/v1_0/user`
+  })
+}
+// 获取频道列表
+export const getUserChannels = () => {
+  return request({
+    method: 'get',
+    url: `/app/v1_0/user/channels`
   })
 }

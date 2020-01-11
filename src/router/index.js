@@ -8,6 +8,26 @@ const routes = [
     path: '/login',
     name: 'login',
     component: () => import('@/views/login')
+  },
+  {
+    path: '/',
+    name: 'tab-bar',
+    component: () => import('@/views/tab-bar'),
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/home')
+      }, {
+        path: 'qa',
+        component: () => import('@/views/qa')
+      }, {
+        path: 'viedo',
+        component: () => import('@/views/viedo')
+      }, {
+        path: 'my',
+        component: () => import('@/views/my')
+      }
+    ]
   }
   // {
   //   path: '/',
