@@ -18,7 +18,10 @@
       close-icon-position="top-left"
       :style="{ height: '100%' }"
     >
-     <channelEdit></channelEdit>
+     <channelEdit
+     v-model="active"
+     @close='channelshow=fales'
+     :user-channel='userChannels'></channelEdit>
     </van-popup>
   </div>
 </template>
@@ -27,6 +30,7 @@
 import { getUserChannels } from '@/api/user.js'
 import articalList from './components/artical.vue'
 import channelEdit from './components/channel-edit.vue'
+import { getItem } from '@/utils/storage'
 export default {
   data () {
     return {
@@ -43,10 +47,22 @@ export default {
   methods: {
     // 获取频道
     async  getChannels () {
-      const { data } = await getUserChannels()
-      this.userChannels = data.data.channels
-      // console.log(data)
-      console.log(data.data.channels)
+      let channels = []
+
+      // 2. 获取本地存储的频道列表
+      const localUserChannles = getItem('user-channels')
+
+      // 3. 如果本地存储有，就使用本地存储的
+      if (localUserChannles) {
+        channels = localUserChannles
+      } else {
+        // 4. 如果本地存储没有，则请求获取接口推荐的频道列表
+        const { data } = await getUserChannels()
+        channels = data.data.channels
+      }
+
+      // 5. 最后，把数据赋值到当前组件中
+      this.userChannels = channels
     }
 
   },

@@ -8,3 +8,21 @@ export const getArticals = params => {
     params
   })
 }
+// 获取联想建议
+export const getSuggestion = q => {
+  return request({
+    method: 'GET',
+    url: '/app/v1_0/suggestion',
+    params: {
+      q
+    }
+  })
+}
+// 获取搜索列表
+export const getSearch = params => {
+  return request({
+    method: 'GET',
+    url: '/app/v1_0/search',
+    params
+  })
+}
