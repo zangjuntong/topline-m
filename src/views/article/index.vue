@@ -60,6 +60,7 @@
           v-for="(comment,index) in articlecomment.list"
           :key="index"
           :comment="comment"
+          @click-replay='OnReplyshow'
         />
       </van-list>
       <!-- /文章评论 -->
@@ -86,6 +87,7 @@
         type="default"
         round
         size="small"
+        @click="isPostshow=true"
       >写评论</van-button>
       <van-icon
         class="comment-icon"
@@ -105,6 +107,43 @@
       <van-icon class="share-icon" name="share" />
     </div>
     <!-- /底部区域 -->
+    <!-- 底部弹层 -->
+    <van-popup
+      v-model="isPostshow"
+      position="bottom"
+    >
+    <div class="post-comment">
+      <van-field
+       class="post-field"
+      v-model="postMessage"
+      rows="2"
+      autosize
+      type="textarea"
+      maxlength="50"
+      placeholder="请输入留言"
+      show-word-limit
+    />
+    <van-button
+      size="small"
+      type="primary"
+      @click="onAddComments"
+      :disabled="!postMessage"
+    >发布</van-button>
+    </div>
+  </van-popup>
+    <!-- /底部弹层 -->
+    <!-- 评论回复弹层 -->
+    <van-popup
+      v-model="isReplyshow"
+      position="bottom"
+      :style="{ height: '70%' }"
+    >
+    <commentReplay
+      @click-close='isReplyshow=false'
+      :comment='currentComment'
+    ></commentReplay>
+  </van-popup>
+    <!-- /评论回复弹层 -->
   </div>
 </template>
 
@@ -117,14 +156,17 @@ import {
   deleteAttitude,
   addFollow,
   deleteFollow,
-  getComments
+  getComments,
+  addComments
 } from '@/api/artical'
 import commentItem from './components/comment-item'
+import commentReplay from './components/comment-replay'
 
 export default {
   name: 'ArticlePage',
   components: {
-    commentItem
+    commentItem,
+    commentReplay
   },
   props: {
     articleID: {
@@ -142,7 +184,11 @@ export default {
         finished: false,
         offset: null,
         totalConent: 0
-      }
+      },
+      isPostshow: false, // 发布评论的弹层显示
+      isReplyshow: false, // 评论回复的弹层显示
+      postMessage: '',
+      currentComment: {}
     }
   },
   computed: {},
@@ -156,6 +202,35 @@ export default {
 
   },
   methods: {
+    async OnReplyshow (comment) {
+      this.currentComment = comment
+      this.isReplyshow = true
+    },
+    async onAddComments () {
+      if (!this.postMessage) {
+        return
+      }
+      this.$toast.loading({
+        duration: 0, // 持续展示 toast
+        message: '操作中...',
+        forbidClick: true // 是否禁止背景点击
+      })
+      try {
+        const { data } = await addComments({
+          target: this.articleID,
+          content: this.postMessage
+        // art_id
+        })
+        this.articlecomment.list.unshift(data.data.new_obj)
+        this.isPostshow = false
+        this.articlecomment.totalConent++
+        this.postMessage = ''
+        this.$toast.success('发布成功')
+      } catch (err) {
+        console.log(err)
+        this.$toast.fail('发布失败')
+      }
+    },
     async onLoad () {
       const articleComment = this.articlecomment
       // 1.请求获取数据
@@ -342,6 +417,15 @@ export default {
     }
     .share-icon {
       bottom: -2px;
+    }
+  }
+  .post-comment {
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+    .post-field {
+      background: #f5f7f9;
+      margin-right: 15px;
     }
   }
 }

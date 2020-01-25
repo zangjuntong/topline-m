@@ -96,3 +96,11 @@ export const getComments = params => {
     params
   })
 }
+// 发布评论
+export const addComments = data => {
+  return request({
+    method: 'POST',
+    url: `/app/v1_0/comments`,
+    data
+  })
+}
