@@ -35,16 +35,15 @@
         <van-icon v-else name="delete" @click="isdeleteShow=true"></van-icon>
       </van-cell>
       <van-cell
-        @click="onSearch(item)"
+        @click="onSearchpan(item,index)"
         :title="item" v-for="(item,index) in searchHristoys"
         :key="index">
         <van-icon
         v-show="isdeleteShow"
-        @click="searchHristoys.splice(index,1)"
         name="close"></van-icon>
       </van-cell>
     </van-cell-group>
-
+<!--  @click="searchHristoys.splice(index,1)" -->
   </div>
 </template>
 
@@ -70,9 +69,12 @@ export default {
     }
   },
   methods: {
-    onSuggestion (item) {
-      this.searchText = item
-      this.isresultshow = true
+    onSearchpan (item, index) {
+      if (!this.isdeleteShow) {
+        this.onSearch(item)
+      } else {
+        this.searchHristoys.splice(index, 1)
+      }
     },
     heightlig (str) {
       return str.toLowerCase().replace(this.searchText.toLowerCase(), `<span style="color: red">${this.searchText}</span>`)

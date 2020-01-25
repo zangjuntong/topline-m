@@ -10,6 +10,8 @@ import './utils/validation.js'
 import './utils/register-vant'
 // 引入less样式
 import './styles/index.less'
+// 插入时间处理组件
+import './utils/datatime'
 Vue.config.productionTip = false
 
 new Vue({

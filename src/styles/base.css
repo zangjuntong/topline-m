@@ -1,6 +1,7 @@
 .van-nav-bar {
   background-color: #3195F9;
 }
-.van-nav-bar__title {
+.van-nav-bar .van-nav-bar__title,
+.van-nav-bar .van-icon {
   color: white;
 }
