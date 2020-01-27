@@ -139,7 +139,9 @@
       :style="{ height: '70%' }"
     >
     <commentReplay
+      v-if="isReplyshow"
       @click-close='isReplyshow=false'
+      :articleId='articleID'
       :comment='currentComment'
     ></commentReplay>
   </van-popup>

@@ -104,3 +104,21 @@ export const addComments = data => {
     data
   })
 }
+// 点赞评论
+export const addLike = commentId => {
+  return request({
+    method: 'POST',
+    url: ` /app/v1_0/comment/likings`,
+    data: {
+      target: commentId
+    }
+
+  })
+}
+// 取消点赞评论
+export const deleteLike = commentId => {
+  return request({
+    method: 'DELETE',
+    url: `/app/v1_0/comment/likings/${commentId}`
+  })
+}
