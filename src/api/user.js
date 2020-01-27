@@ -36,3 +36,18 @@ export const getAllChannels = () => {
     url: `/app/v1_0/channels`
   })
 }
+// 获取用户个人资料
+export const getUserProfile = () => {
+  return request({
+    method: 'get',
+    url: `/app/v1_0/user/profile`
+  })
+}
+// 编辑用户个人资料
+export const editUserProfile = data => {
+  return request({
+    method: 'PATCH',
+    url: `/app/v1_0/user/profile`,
+    data
+  })
+}
