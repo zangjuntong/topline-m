@@ -38,6 +38,9 @@ const routes = [
   }, {
     path: '/user/profile',
     component: () => import('@/views/user-profile')
+  }, {
+    path: '/user/chat',
+    component: () => import('@/views/user-chat')
   }
   // {
   //   path: '/',

@@ -20,7 +20,10 @@ import {
   PullRefresh,
   Popup,
   Search,
-  Loading
+  Loading,
+  ActionSheet,
+  DatetimePicker,
+  ImagePreview
 } from 'vant'
 
 Vue.use(Button)
@@ -44,3 +47,6 @@ Vue.use(Button)
   .use(Popup)
   .use(Search)
   .use(Loading)
+  .use(ActionSheet)
+  .use(DatetimePicker)
+  .use(ImagePreview)
