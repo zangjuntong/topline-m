@@ -41,6 +41,18 @@ const routes = [
   }, {
     path: '/user/chat',
     component: () => import('@/views/user-chat')
+  }, {
+    path: '/my-article/:type?',
+    component: () => import('@/views/userarticles'),
+    props: true
+  }, {
+    // 收藏列表
+    path: '/my-article/collect',
+    component: () => import('@/views/userarticles')
+  }, {
+    // 历史列表
+    path: '/my-article/history',
+    component: () => import('@/views/userarticles')
   }
   // {
   //   path: '/',

@@ -55,7 +55,7 @@
     >
     <van-datetime-picker
       v-model="currentDate"
-      type="datetime"
+      type="date"
       :min-date="minDate"
       :max-date="maxDate"
       @cancel='isEditBirthdayShow=false'

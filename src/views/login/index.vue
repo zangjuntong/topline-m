@@ -109,7 +109,8 @@ export default {
         this.$store.commit('setUser', res.data.data)
         console.log(res)
         this.$toast.success('登录成功')
-        this.$router.push('/')
+        const redirect = this.$route.query.redirect || '/'
+        this.$router.push(redirect)
       } catch (err) {
         this.$toast.fail('登录失败，手机号或验证码错误')
       }

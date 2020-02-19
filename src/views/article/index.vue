@@ -165,7 +165,7 @@ import commentItem from './components/comment-item'
 import commentReplay from './components/comment-replay'
 
 export default {
-  name: 'ArticlePage',
+  name: 'article',
   components: {
     commentItem,
     commentReplay
